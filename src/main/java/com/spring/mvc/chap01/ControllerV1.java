@@ -3,9 +3,7 @@ package com.spring.mvc.chap01;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.taglibs.standard.tag.common.xml.XPathUtil;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 //  어떤 요청들을 처리할지 공통 URL 을 설계
 @RequestMapping("/spring/*")
@@ -85,7 +83,8 @@ public class ControllerV1 {
     }
 
 //    음식 선택 요청 처리
-    @RequestMapping("/food-select")
+//    @RequestMapping(value = "/food-select", method = RequestMethod.POST)
+    @PostMapping("/food-select")
     public String foodSelect(
             String foodName,
             String category
@@ -93,7 +92,7 @@ public class ControllerV1 {
         System.out.println("foodName : " + foodName);
         System.out.println("category : " + category);
 
-        return "";
+        return "hello";
     }
 
 
