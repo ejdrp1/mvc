@@ -1,7 +1,9 @@
 package com.spring.mvc.chap01;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.apache.taglibs.standard.tag.common.xml.XPathUtil;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -64,6 +66,21 @@ public class ControllerV1 {
     @RequestMapping("/order")
     public String order(OrderRequestDTO dto) {
         System.out.println("dto : " + dto);
+        return "";
+    }
+
+//    == 4. URL 에 경로로 붙어 있는 데이터 읽기
+//    ==> /spring/member/hong/107
+//    hong 이라는 유저의 107 번 게시글을 읽고 싶음
+    @RequestMapping("/member/{userName}/{bNo}")
+    public String member(
+//            @PathVariable (생략 불가)
+            @PathVariable String userName,
+            @PathVariable Long bNo
+    ) {
+        System.out.println("userName : " + userName);
+        System.out.println("bNo : " + bNo);
+
         return "";
     }
 
