@@ -14,7 +14,7 @@ public class ControllerV1 {
     public String hello() {
         System.out.println("\n===== hello 요청이 들어옴!! =====\n");
         // 어떤 JSP 를 열어줄지 경로를 적는다.
-        return "WEB-INF/views/hello.jsp";
+        return "/WEB-INF/views/hello.jsp";
     }
 
 
