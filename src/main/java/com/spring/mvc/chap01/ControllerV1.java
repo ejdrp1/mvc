@@ -84,6 +84,17 @@ public class ControllerV1 {
         return "";
     }
 
+//    음식 선택 요청 처리
+    @RequestMapping("/food-select")
+    public String foodSelect(
+            String foodName,
+            String category
+    ) {
+        System.out.println("foodName : " + foodName);
+        System.out.println("category : " + category);
+
+        return "";
+    }
 
 
 
