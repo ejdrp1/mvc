@@ -58,7 +58,14 @@ public class ControllerV1 {
         return "";
     }
 
-//    == 3. 커멘드 객체 사용
+//    == 3. 커멘드 객체 사용 (주로 사용함)
+//    == 쿼리 스트링의 양이 너무 많을 경우 또는 연관성이 있을 경우
+//    ==> ex) /spring/order?oNum=20230419007-P&goods=구두&amount=3&price=50000...
+    @RequestMapping("/order")
+    public String order(OrderRequestDTO dto) {
+        System.out.println("dto : " + dto);
+        return "";
+    }
 
 
 
