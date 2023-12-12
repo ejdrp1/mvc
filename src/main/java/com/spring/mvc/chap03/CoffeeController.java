@@ -5,26 +5,26 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/coffee")
 public class CoffeeController {
 
-//    @request : /coffee/order : GET
+    //    @request : /coffee/order : GET
 //    @response : /chap03/coffee-form.jsp
     @GetMapping("/order")
     public String coffeeOrder() {
         System.out.println("/coffee/order : GET 요청 발생!");
 
 
-
         return "chap03/coffee-form";
     }
 
-//    @request : /coffee/result : POST
+    //    @request : /coffee/result : POST
 //    @response : /chap03/coffee-result.jsp
     @PostMapping("/result")
-    public String coffeeResult(String menu, int price, Model model) {
+    public String coffeeResult(String menu, @RequestParam(defaultValue = "3000") int price, Model model) {
         System.out.println("menu : " + menu);
         System.out.println("price : " + price);
 
@@ -33,9 +33,6 @@ public class CoffeeController {
 
         return "chap03/coffee-result";
     }
-
-
-
 
 
 }

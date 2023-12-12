@@ -68,13 +68,14 @@
         <label class="price"># 가격 : <span class="price-value">3000</span>원</label>
 
         <!-- hidden : 화면에 렌더링은 안되지만 서버로 보낼 수 있음 -->
-        <input type="hidden" name="price" id="price-tag">
+        <input type="hidden" name="price" id="price-tag" value="3000">
 
         <label>
           <button type="submit">주문하기</button>
         </label>
 
       </form>
+
     </div>
 
   </div>

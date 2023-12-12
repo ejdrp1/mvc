@@ -18,6 +18,8 @@
     <li># 지불하실 가격 : ${p}원</li>
   </ul>
 
+  <a href="/coffee/order">재주문하기</a>
+
 </body>
 
 </html>
