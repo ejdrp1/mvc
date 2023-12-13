@@ -118,10 +118,6 @@
           <li>
             # 학번: ${s.stuNum},
             이름: <a href="/score/detail?stuNum=${s.stuNum}">${s.name}</a>,
-            국어: ${s.kor}점,
-            영어: ${s.eng}점,
-            수학: ${s.math}점,
-            총점: ${s.total}점,
             평균: ${s.average}점,
             학점: ${s.grade}
             <a class="del-btn" href="/score/remove?stuNum=${s.stuNum}">삭제</a>
