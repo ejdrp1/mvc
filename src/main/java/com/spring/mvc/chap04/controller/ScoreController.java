@@ -1,5 +1,6 @@
 package com.spring.mvc.chap04.controller;
 
+import com.spring.mvc.chap04.dto.ScoreListResponseDTO;
 import com.spring.mvc.chap04.dto.ScoreRequestDTO;
 import com.spring.mvc.chap04.entity.Score;
 import com.spring.mvc.chap04.repository.ScoreRepositoryImpl;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /*
     # 요청 URL
@@ -54,7 +57,15 @@ public class ScoreController {
         System.out.println("정렬 요구사항 : " + sort);
 
         List<Score> scoreList = repository.findAll(sort);
-        model.addAttribute("sList", scoreList);
+
+//        scoreList 에서 원하는 정보만 추출하고 이름을 마스킹해서
+//        다시 DTO 리스트로 변환해줘야 한다.
+        List<ScoreListResponseDTO> responseDTOList = new ArrayList<>();
+        scoreList.stream()
+                .map(ScoreListResponseDTO::new)
+                .collect(Collectors.toList());
+
+        model.addAttribute("sList", responseDTOList);
 
         return "chap04/score-list";
     }
