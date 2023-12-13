@@ -109,7 +109,7 @@
           <div class="sort-link-group">
             <div><a href="/score/list?sort=num">학번순</a></div>
             <div><a href="/score/list?sort=name">이름순</a></div>
-            <div><a href="/score/list?srot=avg">평균순</a></div>
+            <div><a href="/score/list?sort=avg">평균순</a></div>
           </div>
 
         </li>
