@@ -117,7 +117,8 @@ public class ScoreController {
 
         Score score = repository.findByStuNum(stuNum);
         score.changeScore(dto);
-        return "chap04/score-modify";
+
+        return "redirect:/score/detail?stuNum=" + stuNum;
     }
 
     private void retrieve(int stuNum, Model model) {
