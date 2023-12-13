@@ -48,11 +48,12 @@ public class ScoreController {
 
     //    1. 성적 등록 화면 띄우기 + 정보 목록 조회
     @GetMapping("/list")
-    public String list(Model model, String sort) {
+    public String list(Model model,
+                       @RequestParam(defaultValue = "num") String sort) {
         System.out.println("/score/list : GET!");
         System.out.println("정렬 요구사항 : " + sort);
 
-        List<Score> scoreList = repository.findAll();
+        List<Score> scoreList = repository.findAll(sort);
         model.addAttribute("sList", scoreList);
 
         return "chap04/score-list";
@@ -102,6 +103,14 @@ public class ScoreController {
         model.addAttribute("s", score);
 
         return "chap04/score-detail";
+    }
+
+//    5. 수정 화면 열어주기
+    @GetMapping("/modify")
+    public String modify(int stuNum, Model model) {
+        System.out.println("/score/modify : GET!");
+//        retrieve(stuNum, model);
+        return "chap04/score-modify";
     }
 
 

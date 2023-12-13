@@ -9,12 +9,12 @@ import java.util.stream.Collectors;
 import static com.spring.mvc.chap04.entity.Grade.A;
 
 @Repository // 스프링 빈 등록 : 객체의 생성의 제어권을 스프링에게 위임
-public class ScoreRepositoryImpl implements ScoreRepository{
+public class ScoreRepositoryImpl implements ScoreRepository {
 
-//    key : 학번, value : 성적 정보
+    //    key : 학번, value : 성적 정보
     private static final Map<Integer, Score> scoreMap;
 
-//    학번에 사용할 일련 번호
+    //    학번에 사용할 일련 번호
     private static int sequence;
 
     static {
@@ -33,6 +33,27 @@ public class ScoreRepositoryImpl implements ScoreRepository{
         return new ArrayList<>(scoreMap.values())
                 .stream()
                 .sorted(Comparator.comparing(Score::getStuNum))
+                .collect(Collectors.toList())
+                ;
+    }
+
+    @Override
+    public List<Score> findAll(String sort) {
+        Comparator<Score> comparator = Comparator.comparing(Score::getStuNum);
+        switch (sort) {
+            case "num":
+                comparator = Comparator.comparing(Score::getStuNum);
+                break;
+            case "name":
+                comparator = Comparator.comparing(Score::getName);
+                break;
+            case "avg":
+                comparator = Comparator.comparing(Score::getAverage).reversed();
+                break;
+        }
+        return new ArrayList<>(scoreMap.values())
+                .stream()
+                .sorted(comparator)
                 .collect(Collectors.toList())
                 ;
     }

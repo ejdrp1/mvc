@@ -12,13 +12,18 @@ public interface ScoreRepository {
     //     성적 정보 전체 목록 조회
     List<Score> findAll();
 
+    //    성적 정보 정렬 기능
+    default List<Score> findAll(String sort) {
+        return null;
+    }
+
     //    성적 정보 등록
     boolean save(Score score);
 
     //    성적 정보 한 개 삭제
     boolean deleteByStuNum(int stuNum);
 
-//    성적 정보 개별 조회
+    //    성적 정보 개별 조회
     Score findByStuNum(int stuNum);
 
 }
