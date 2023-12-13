@@ -98,10 +98,7 @@ public class ScoreController {
     @GetMapping("/detail")
     public String detail(int stuNum, Model model) {
         System.out.println("/score/detail : GET!");
-
-        Score score = repository.findByStuNum(stuNum);
-        model.addAttribute("s", score);
-
+        retrieve(stuNum, model);
         return "chap04/score-detail";
     }
 
@@ -109,8 +106,13 @@ public class ScoreController {
     @GetMapping("/modify")
     public String modify(int stuNum, Model model) {
         System.out.println("/score/modify : GET!");
-//        retrieve(stuNum, model);
+        retrieve(stuNum, model);
         return "chap04/score-modify";
+    }
+
+    private void retrieve(int stuNum, Model model) {
+        Score score = repository.findByStuNum(stuNum);
+        model.addAttribute("s", score);
     }
 
 
