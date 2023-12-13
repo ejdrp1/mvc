@@ -2,6 +2,8 @@ package com.spring.mvc.chap04.controller;
 
 import com.spring.mvc.chap04.entity.Score;
 import com.spring.mvc.chap04.repository.ScoreRepositoryImpl;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,15 +30,19 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/score")
+//@AllArgsConstructor : 모든 필드를 초기화하는 생성자
+@RequiredArgsConstructor // final 필드만 초기화하는 생성자
 public class ScoreController {
 
 //    저장소에 의존해야 데이터를 받아서 클라이언트에게 응답할 수 있음
     private final ScoreRepositoryImpl repository;
 
-    @Autowired
-    public ScoreController(ScoreRepositoryImpl repository) {
-        this.repository = repository;
-    }
+//    만약에 클래스에 생성자가 단 1개라면?
+//    자동으로 @Autowired 를 써줌
+//    @Autowired
+//    public ScoreController(ScoreRepositoryImpl repository) {
+//        this.repository = repository;
+//    }
 
     //    1. 성적 등록 화면 띄우기 + 정보 목록 조회
     @GetMapping("/list")
