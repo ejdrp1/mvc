@@ -2,6 +2,7 @@ package com.spring.mvc.chap04.repository;
 
 import com.spring.mvc.chap04.entity.Score;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,21 +30,25 @@ public class ScoreRepositoryImpl implements ScoreRepository{
 
     @Override
     public List<Score> findAll() {
-        return null;
+        return new ArrayList<>(scoreMap.values());
     }
 
     @Override
     public boolean save(Score score) {
-        return false;
+        if (scoreMap.containsKey(score.getStuNum())) return false;
+        scoreMap.put(score.getStuNum(), score);
+        return true;
     }
 
     @Override
     public boolean deleteByStuNum(int stuNum) {
-        return false;
+        if (!scoreMap.containsKey(stuNum)) return false;
+        scoreMap.remove(stuNum);
+        return true;
     }
 
     @Override
     public Score findByStuNum(int stuNum) {
-        return null;
+        return scoreMap.get(stuNum);
     }
 }
