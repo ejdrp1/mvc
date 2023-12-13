@@ -2,10 +2,8 @@ package com.spring.mvc.chap04.repository;
 
 import com.spring.mvc.chap04.entity.Score;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.spring.mvc.chap04.entity.Grade.A;
 
@@ -30,7 +28,11 @@ public class ScoreRepositoryImpl implements ScoreRepository{
 
     @Override
     public List<Score> findAll() {
-        return new ArrayList<>(scoreMap.values());
+        return new ArrayList<>(scoreMap.values())
+                .stream()
+                .sorted(Comparator.comparing(Score::getStuNum))
+                .collect(Collectors.toList())
+                ;
     }
 
     @Override
