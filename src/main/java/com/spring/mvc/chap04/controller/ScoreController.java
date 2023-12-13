@@ -1,5 +1,6 @@
 package com.spring.mvc.chap04.controller;
 
+import com.spring.mvc.chap04.dto.ScoreRequestDTO;
 import com.spring.mvc.chap04.entity.Score;
 import com.spring.mvc.chap04.repository.ScoreRepositoryImpl;
 import lombok.AllArgsConstructor;
@@ -34,7 +35,7 @@ import java.util.List;
 @RequiredArgsConstructor // final 필드만 초기화하는 생성자
 public class ScoreController {
 
-//    저장소에 의존해야 데이터를 받아서 클라이언트에게 응답할 수 있음
+    //    저장소에 의존해야 데이터를 받아서 클라이언트에게 응답할 수 있음
     private final ScoreRepositoryImpl repository;
 
 //    만약에 클래스에 생성자가 단 1개라면?
@@ -55,36 +56,34 @@ public class ScoreController {
         return "chap04/score-list";
     }
 
-//    2. 성적 정보 등록 처리 요청
+    //    2. 성적 정보 등록 처리 요청
     @PostMapping("/register")
-    public String register() {
-        System.out.println("/score/register : POST!");
-
+    public String register(ScoreRequestDTO dto) {
 //        입력 데이터 (쿼리 스트링) 읽기
+        System.out.println("/score/register : POST! - " + dto);
 
+//        dto(ScoreDTO) 를 entity(Score) 로 변환해야 함
+        Score score = new Score(dto);
+
+//        save 명령
+//        repository.save(dto);
 
         return "";
     }
 
-//    3. 성적 정보 삭제 요청
+    //    3. 성적 정보 삭제 요청
     @PostMapping("/remove")
     public String remove() {
         System.out.println("/score/remove : POST!");
         return "";
     }
 
-//    4. 성적 정보 상세 조회 요청
+    //    4. 성적 정보 상세 조회 요청
     @GetMapping("/detail")
     public String detail() {
         System.out.println("/score/detail : GET!");
         return "";
     }
-
-
-
-
-
-
 
 
 }
