@@ -4,6 +4,7 @@ import com.spring.mvc.chap04.dto.ScoreListResponseDTO;
 import com.spring.mvc.chap04.dto.ScoreRequestDTO;
 import com.spring.mvc.chap04.entity.Score;
 import com.spring.mvc.chap04.repository.ScoreRepositoryImpl;
+import com.spring.mvc.chap04.service.ScoreService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,8 @@ import java.util.stream.Collectors;
 public class ScoreController {
 
     //    저장소에 의존해야 데이터를 받아서 클라이언트에게 응답할 수 있음
-    private final ScoreRepositoryImpl repository;
+//    private final ScoreRepositoryImpl repository;
+    private final ScoreService scoreService;
 
 //    만약에 클래스에 생성자가 단 1개라면?
 //    자동으로 @Autowired 를 써줌
@@ -56,15 +58,7 @@ public class ScoreController {
         System.out.println("/score/list : GET!");
         System.out.println("정렬 요구사항 : " + sort);
 
-        List<Score> scoreList = repository.findAll(sort);
-
-//        scoreList 에서 원하는 정보만 추출하고 이름을 마스킹해서
-//        다시 DTO 리스트로 변환해줘야 한다.
-        List<ScoreListResponseDTO> responseDTOList = new ArrayList<>();
-        scoreList.stream()
-                .map(ScoreListResponseDTO::new)
-                .collect(Collectors.toList());
-
+        List<ScoreListResponseDTO> responseDTOList = scoreService.getList(sort);
         model.addAttribute("sList", responseDTOList);
 
         return "chap04/score-list";
@@ -76,11 +70,7 @@ public class ScoreController {
 //        입력 데이터 (쿼리 스트링) 읽기
         System.out.println("/score/register : POST! - " + dto);
 
-//        dto(ScoreDTO) 를 entity(Score) 로 변환해야 함
-        Score score = new Score(dto);
-
-//        save 명령
-        repository.save(score);
+        scoreService.insertScore(dto);
 
         /*
             등록 요청에서 JSP 뷰 포워딩을 하면
@@ -99,9 +89,7 @@ public class ScoreController {
     @GetMapping("/remove")
     public String remove(int stuNum) {
         System.out.println("/score/remove : GET!");
-
-        repository.deleteByStuNum(stuNum);
-
+        scoreService.delete(stuNum);
         return "redirect:/score/list";
     }
 
@@ -121,19 +109,19 @@ public class ScoreController {
         return "chap04/score-modify";
     }
 
-    //    5. 수정 화면 열어주기
+    //    6. 수정 완료 열어주기
     @PostMapping("/modify")
     public String modify(int stuNum, ScoreRequestDTO dto) {
         System.out.println("/score/modify : POST!");
 
-        Score score = repository.findByStuNum(stuNum);
+        Score score = scoreService.retrieve(stuNum);
         score.changeScore(dto);
 
         return "redirect:/score/detail?stuNum=" + stuNum;
     }
 
     private void retrieve(int stuNum, Model model) {
-        Score score = repository.findByStuNum(stuNum);
+        Score score = scoreService.retrieve(stuNum);
         model.addAttribute("s", score);
     }
 

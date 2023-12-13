@@ -27,9 +27,9 @@ public class ScoreListResponseDTO {
     }
 
 //    첫 글자만 빼고 다 *처리
-    private String makeMaskingName(String name) {
-        String maskingName = String.valueOf(name.charAt(0));
-        for (int i = 1; i < maskingName.length(); i++) {
+    private String makeMaskingName(String originalName) {
+        String maskingName = String.valueOf(originalName.charAt(0));
+        for (int i = 1; i < originalName.length(); i++) {
             maskingName += "*";
         }
         return maskingName;
