@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -66,16 +67,29 @@ public class ScoreController {
         Score score = new Score(dto);
 
 //        save 명령
-//        repository.save(dto);
+        repository.save(score);
 
-        return "";
+        /*
+            등록 요청에서 JSP 뷰 포워딩을 하면
+            갱신된 목록을 다시 한번 저장소에서 불러와
+            모델에 담는 추가적인 코드가 필요하지만
+
+            리다이렉트를 통해서 위에서 만든 /score/list : GET
+            을 자동으로 다시 보낼 수 있다면 번거로운 코드가 줄어들 수 있다.
+        */
+
+//        요청 URL 을 적어야함!!!!!
+        return "redirect:/score/list";
     }
 
     //    3. 성적 정보 삭제 요청
-    @PostMapping("/remove")
-    public String remove() {
-        System.out.println("/score/remove : POST!");
-        return "";
+    @GetMapping("/remove")
+    public String remove(int stuNum) {
+        System.out.println("/score/remove : GET!");
+
+        repository.deleteByStuNum(stuNum);
+
+        return "redirect:/score/list";
     }
 
     //    4. 성적 정보 상세 조회 요청
