@@ -28,6 +28,7 @@ public class ScoreController {
     @GetMapping("/list")
     public String list() {
         System.out.println("/score/list : GET!");
+
         return "";
     }
 
