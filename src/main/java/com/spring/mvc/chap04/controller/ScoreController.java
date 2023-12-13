@@ -59,6 +59,10 @@ public class ScoreController {
     @PostMapping("/register")
     public String register() {
         System.out.println("/score/register : POST!");
+
+//        입력 데이터 (쿼리 스트링) 읽기
+
+
         return "";
     }
 
