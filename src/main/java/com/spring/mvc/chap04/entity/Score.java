@@ -21,6 +21,10 @@ public class Score {
 
     public Score(ScoreRequestDTO dto) {
         this.name = dto.getName();
+        changeScore(dto);
+    }
+
+    public void changeScore(ScoreRequestDTO dto) {
         this.kor = dto.getKor();
         this.eng = dto.getEng();
         this.math = dto.getMath();

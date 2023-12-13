@@ -102,11 +102,21 @@ public class ScoreController {
         return "chap04/score-detail";
     }
 
-//    5. 수정 화면 열어주기
+    //    5. 수정 화면 열어주기
     @GetMapping("/modify")
     public String modify(int stuNum, Model model) {
         System.out.println("/score/modify : GET!");
         retrieve(stuNum, model);
+        return "chap04/score-modify";
+    }
+
+    //    5. 수정 화면 열어주기
+    @PostMapping("/modify")
+    public String modify(int stuNum, ScoreRequestDTO dto) {
+        System.out.println("/score/modify : POST!");
+
+        Score score = repository.findByStuNum(stuNum);
+        score.changeScore(dto);
         return "chap04/score-modify";
     }
 
