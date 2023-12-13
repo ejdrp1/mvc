@@ -69,7 +69,7 @@
 
     <div class="wrap">
         <section class="score-main">
-            <h1>${s.stuName}님 성적 정보</h1>
+            <h1>${s.name}님 성적 정보</h1>
             <ul>
                 <li># 국어: ${s.kor}점</li>
                 <li># 영어: ${s.eng}점</li>
