@@ -1,9 +1,15 @@
 package com.spring.mvc.chap04.controller;
 
+import com.spring.mvc.chap04.entity.Score;
+import com.spring.mvc.chap04.repository.ScoreRepositoryImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /*
     # 요청 URL
@@ -24,12 +30,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/score")
 public class ScoreController {
 
-//    1. 성적 등록 화면 띄우기 + 정보 목록 조회
+//    저장소에 의존해야 데이터를 받아서 클라이언트에게 응답할 수 있음
+    private final ScoreRepositoryImpl repository;
+
+    @Autowired
+    public ScoreController(ScoreRepositoryImpl repository) {
+        this.repository = repository;
+    }
+
+    //    1. 성적 등록 화면 띄우기 + 정보 목록 조회
     @GetMapping("/list")
-    public String list() {
+    public String list(Model model) {
         System.out.println("/score/list : GET!");
 
-        return "";
+        List<Score> scoreList = repository.findAll();
+        model.addAttribute("sList", scoreList);
+
+        return "chap04/score-list";
     }
 
 //    2. 성적 정보 등록 처리 요청

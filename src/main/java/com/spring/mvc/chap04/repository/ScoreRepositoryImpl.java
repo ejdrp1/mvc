@@ -1,12 +1,15 @@
 package com.spring.mvc.chap04.repository;
 
 import com.spring.mvc.chap04.entity.Score;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.spring.mvc.chap04.entity.Grade.A;
 
+@Repository // 스프링 빈 등록 : 객체의 생성의 제어권을 스프링에게 위임
 public class ScoreRepositoryImpl implements ScoreRepository{
 
 //    key : 학번, value : 성적 정보
@@ -38,6 +41,7 @@ public class ScoreRepositoryImpl implements ScoreRepository{
     @Override
     public boolean save(Score score) {
         if (scoreMap.containsKey(score.getStuNum())) return false;
+        score.setStuNum(++sequence);
         scoreMap.put(score.getStuNum(), score);
         return true;
     }
