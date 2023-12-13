@@ -40,8 +40,30 @@ class ScoreRepositoryImplTest {
     @DisplayName("저장소에서 findByStuNum 을 호출하여 학번이 2인 학생을 조회하면 " +
             "그 학생의 국어 점수가 33점이고, " +
             "이름이 춘식이어야 한다.")
-    void findByStuNumTest() {
+    void findOneTest() {
+        // given
+        int stuNum = 2;
 
+        // when
+        Score score = repository.findByStuNum(stuNum);
+
+        // then
+        assertEquals(33, score.getKor());
+        assertEquals("춘식이", score.getName());
+    }
+
+    @Test
+    @DisplayName("저장소에서 findByStuNum 을 호출하여 " +
+            "학번이 99인 학생을 조회하면 null 이 return 될 것이다.")
+    void findOneTest2() {
+        // given
+        int stuNum = 99;
+
+        // when
+        Score score = repository.findByStuNum(stuNum);
+
+        // then
+        assertNull(score);
     }
 
 }
