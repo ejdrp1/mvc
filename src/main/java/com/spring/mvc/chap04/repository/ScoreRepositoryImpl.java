@@ -48,7 +48,7 @@ public class ScoreRepositoryImpl implements ScoreRepository {
                 comparator = Comparator.comparing(Score::getName);
                 break;
             case "avg":
-                comparator = Comparator.comparing(Score::getAverage).reversed();
+                comparator = Comparator.comparing(Score::getAverage);
                 break;
         }
         return new ArrayList<>(scoreMap.values())
