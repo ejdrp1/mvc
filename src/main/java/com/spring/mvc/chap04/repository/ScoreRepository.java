@@ -20,4 +20,6 @@ public interface ScoreRepository {
 //    성적 정보 삭제
     boolean deleteByStuNum(int stuNum);
 
+//    성적 정보 개별 조회
+    Score findByStuNum(int stuNum);
 }

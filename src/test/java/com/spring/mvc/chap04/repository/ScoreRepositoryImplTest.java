@@ -37,7 +37,8 @@ class ScoreRepositoryImplTest {
     }
 
     @Test
-    @DisplayName("저장소에서 findByStuNum 을 호출하여 학번이 2인 학생을 조회하면 " +
+    @DisplayName("저장소에서 findByStuNum 을 호출하여 " +
+            "학번이 2인 학생을 조회하면 " +
             "그 학생의 국어 점수가 33점이고, " +
             "이름이 춘식이어야 한다.")
     void findOneTest() {
